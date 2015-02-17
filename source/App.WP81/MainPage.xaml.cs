@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -48,8 +49,8 @@ namespace App.WP81
             // this event is handled for you.
         }
 
-        private int _CommandGroup;
-        public int CommandGroup
+        private string _CommandGroup;
+        public string CommandGroup
         {
             get { return _CommandGroup; }
             set
@@ -67,6 +68,6 @@ namespace App.WP81
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(property));
             }
-        }
+        }        
     }
 }

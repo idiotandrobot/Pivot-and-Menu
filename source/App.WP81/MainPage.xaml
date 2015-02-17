@@ -20,17 +20,20 @@
             <TextBlock Text="{Binding CommandGroup}" 
                        Style="{StaticResource HeaderTextBlockStyle}"
                        TextAlignment="Center"/>
-            <Pivot Title="PAGES" SelectedIndex="{Binding CommandGroup, Mode=TwoWay}">
-                <PivotItem Header="One">
+            <local:GroupPivot Title="PAGES" CommandGroup="{Binding CommandGroup, Mode=TwoWay}">
+                <local:GroupPivotItem Header="One"
+                                      CommandGroup="one">
                     <ToggleSwitch OnContent="one on"
                                   OffContent="one off"
                                   IsOn="{Binding ElementName=AppBarButtonOne, Path=IsEnabled, Mode=TwoWay}"/>
-                </PivotItem>
-                <PivotItem Header="Two">
+                </local:GroupPivotItem>
+                <local:GroupPivotItem Header="Two"
+                                      CommandGroup="two">
                     <CheckBox Content="two enabled" 
                               IsChecked="{Binding ElementName=AppBarButtonTwo, Path=IsEnabled, Mode=TwoWay}"/>
-                </PivotItem>
-                <PivotItem Header="Three">
+                </local:GroupPivotItem>
+                <local:GroupPivotItem Header="Three"
+                                      CommandGroup="three">
                     <StackPanel>
                     <ToggleSwitch OnContent="one on"
                                   OffContent="one off"
@@ -45,35 +48,41 @@
                                   OffContent="four off"
                                   IsOn="{Binding ElementName=AppBarButtonFour, Path=IsEnabled, Mode=TwoWay}"/>
                     </StackPanel>
-                </PivotItem>
-                <PivotItem Header="Four"/>
-            </Pivot>
+                </local:GroupPivotItem>
+                <local:GroupPivotItem Header="Four"
+                                      CommandGroup="four"/>
+            </local:GroupPivot>
         </StackPanel>
     </Grid>
 
     <Page.BottomAppBar>
         <CommandBar>
-            <AppBarButton x:Name="AppBarButtonOne"
+            <local:GroupAppBarButton x:Name="AppBarButtonOne"
                           Label="one"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=0}"
+                          ActiveCommandGroup="{Binding CommandGroup}"
+                          CommandGroup="one"
                           Icon="OneBar"/>
-            <AppBarButton x:Name="AppBarButtonTwo"
+            <local:GroupAppBarButton x:Name="AppBarButtonTwo"
                           Label="two"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=1}"
+                          ActiveCommandGroup="{Binding CommandGroup}"
+                          CommandGroup="two"
                           Icon="TwoBars"/>
-            <AppBarButton x:Name="AppBarButtonThree"
+            <local:GroupAppBarButton x:Name="AppBarButtonThree"
                           Label="three"
-                          Icon="ThreeBars"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=2}"/>
-            <AppBarButton x:Name="AppBarButtonFour"
+                          ActiveCommandGroup="{Binding CommandGroup}"
+                          CommandGroup="three"
+                          Icon="ThreeBars"/>
+            <local:GroupAppBarButton x:Name="AppBarButtonFour"
                           Label="four"
-                          Icon="FourBars"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=3}"/>
+                          ActiveCommandGroup="{Binding CommandGroup}"
+                          CommandGroup="four"
+                          Icon="FourBars"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="AppBarButtonFourExtra"
+                    <local:GroupAppBarButton x:Name="AppBarButtonFourExtra"
                           Label="four extra"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=3}"/>
-            </CommandBar.SecondaryCommands>
+                          ActiveCommandGroup="{Binding CommandGroup}"
+                          CommandGroup="four"/>
+                </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
 </Page>
