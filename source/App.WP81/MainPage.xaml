@@ -1,0 +1,79 @@
+﻿<Page
+    x:Class="App.WP81.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App.WP81"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    
+    <Page.Resources>
+        <local:IndexToVisibilityConverter x:Key="IndexToVisibilityConverter"/>
+    </Page.Resources>
+
+    <Grid>
+        <StackPanel>
+            <TextBlock Text="CommandGroup" 
+                       Style="{StaticResource GroupHeaderTextBlockStyle}" 
+                       Margin="12,0,0,0"/>
+            <TextBlock Text="{Binding CommandGroup}" 
+                       Style="{StaticResource HeaderTextBlockStyle}"
+                       TextAlignment="Center"/>
+            <Pivot Title="PAGES" SelectedIndex="{Binding CommandGroup, Mode=TwoWay}">
+                <PivotItem Header="One">
+                    <ToggleSwitch OnContent="one on"
+                                  OffContent="one off"
+                                  IsOn="{Binding ElementName=AppBarButtonOne, Path=IsEnabled, Mode=TwoWay}"/>
+                </PivotItem>
+                <PivotItem Header="Two">
+                    <CheckBox Content="two enabled" 
+                              IsChecked="{Binding ElementName=AppBarButtonTwo, Path=IsEnabled, Mode=TwoWay}"/>
+                </PivotItem>
+                <PivotItem Header="Three">
+                    <StackPanel>
+                    <ToggleSwitch OnContent="one on"
+                                  OffContent="one off"
+                                  IsOn="{Binding ElementName=AppBarButtonOne, Path=IsEnabled, Mode=TwoWay}"/>
+                    <ToggleSwitch OnContent="two on"
+                                  OffContent="two off"
+                                  IsOn="{Binding ElementName=AppBarButtonTwo, Path=IsEnabled, Mode=TwoWay}"/>
+                    <ToggleSwitch OnContent="three on"
+                                  OffContent="three off"
+                                  IsOn="{Binding ElementName=AppBarButtonThree, Path=IsEnabled, Mode=TwoWay}"/>
+                    <ToggleSwitch OnContent="four on"
+                                  OffContent="four off"
+                                  IsOn="{Binding ElementName=AppBarButtonFour, Path=IsEnabled, Mode=TwoWay}"/>
+                    </StackPanel>
+                </PivotItem>
+                <PivotItem Header="Four"/>
+            </Pivot>
+        </StackPanel>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Name="AppBarButtonOne"
+                          Label="one"
+                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=0}"
+                          Icon="OneBar"/>
+            <AppBarButton x:Name="AppBarButtonTwo"
+                          Label="two"
+                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=1}"
+                          Icon="TwoBars"/>
+            <AppBarButton x:Name="AppBarButtonThree"
+                          Label="three"
+                          Icon="ThreeBars"
+                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=2}"/>
+            <AppBarButton x:Name="AppBarButtonFour"
+                          Label="four"
+                          Icon="FourBars"
+                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=3}"/>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="AppBarButtonFourExtra"
+                          Label="four extra"
+                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=3}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
