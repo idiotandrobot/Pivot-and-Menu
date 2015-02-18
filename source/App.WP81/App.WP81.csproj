@@ -88,7 +88,6 @@
     <Compile Include="GroupAppBarButton.cs" />
     <Compile Include="GroupPivot.cs" />
     <Compile Include="GroupPivotItem.cs" />
-    <Compile Include="IndexToVisibilityConverter.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
