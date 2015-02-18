@@ -21,13 +21,11 @@ namespace App.WP81
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page, INotifyPropertyChanged
+    public sealed partial class MainPage : Page
     {
         public MainPage()
         {
             this.InitializeComponent();
-
-            this.DataContext = this;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
@@ -48,24 +46,16 @@ namespace App.WP81
             // this event is handled for you.
         }
 
-        private int _CommandGroup;
-        public int CommandGroup
+        private void Pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            get { return _CommandGroup; }
-            set
+            var pivot = sender as Pivot;
+            if (pivot != null)
             {
-                _CommandGroup = value;
-                OnPropertyChanged("CommandGroup");
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
+                AppBarButtonOne.Visibility = pivot.SelectedIndex == 0 ? Visibility.Visible : Visibility.Collapsed;
+                AppBarButtonTwo.Visibility = pivot.SelectedIndex == 1 ? Visibility.Visible : Visibility.Collapsed;
+                AppBarButtonThree.Visibility = pivot.SelectedIndex == 2 ? Visibility.Visible : Visibility.Collapsed;
+                AppBarButtonFour.Visibility = pivot.SelectedIndex == 3 ? Visibility.Visible : Visibility.Collapsed;
+                AppBarButtonFourExtra.Visibility = pivot.SelectedIndex == 3 ? Visibility.Visible : Visibility.Collapsed;
             }
         }
     }

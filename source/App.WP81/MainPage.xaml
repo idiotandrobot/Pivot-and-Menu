@@ -8,10 +8,6 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
-    <Page.Resources>
-        <local:IndexToVisibilityConverter x:Key="IndexToVisibilityConverter"/>
-    </Page.Resources>
-
     <Grid>
         <StackPanel>
             <TextBlock Text="CommandGroup" 
@@ -20,7 +16,7 @@
             <TextBlock Text="{Binding CommandGroup}" 
                        Style="{StaticResource HeaderTextBlockStyle}"
                        TextAlignment="Center"/>
-            <Pivot Title="PAGES" SelectedIndex="{Binding CommandGroup, Mode=TwoWay}">
+            <Pivot Title="PAGES" SelectionChanged="Pivot_SelectionChanged">
                 <PivotItem Header="One">
                     <ToggleSwitch OnContent="one on"
                                   OffContent="one off"
@@ -55,24 +51,19 @@
         <CommandBar>
             <AppBarButton x:Name="AppBarButtonOne"
                           Label="one"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=0}"
                           Icon="OneBar"/>
             <AppBarButton x:Name="AppBarButtonTwo"
                           Label="two"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=1}"
                           Icon="TwoBars"/>
             <AppBarButton x:Name="AppBarButtonThree"
                           Label="three"
-                          Icon="ThreeBars"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=2}"/>
+                          Icon="ThreeBars"/>
             <AppBarButton x:Name="AppBarButtonFour"
                           Label="four"
-                          Icon="FourBars"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=3}"/>
+                          Icon="FourBars"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton x:Name="AppBarButtonFourExtra"
-                          Label="four extra"
-                          Visibility="{Binding CommandGroup, Converter={StaticResource IndexToVisibilityConverter}, ConverterParameter=3}"/>
+                          Label="four extra"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
